@@ -1,0 +1,55 @@
+
+<div class=" box header-xox-game">
+    <div class="" style="margin-top:60px">
+        <h3>XOX Redifined</h3>
+        </div>
+    <div class="row-adjust " >
+        <input type="button" class="button" [ngStyle]="{'background-color':buttons.zero === true?'green':''}" #buttonone id="button-one" value={{eventValues[0]}}
+            (click)="changeEleValuesOld(0)">
+
+        <input type="button" class="button" [ngStyle]="{'background-color':buttons.one === true?'green':''}" #buttontwo id="button-two" value={{eventValues[1]}}
+            (click)="changeEleValuesOld(1)">
+
+        <input type="button" class="button" [ngStyle]="{'background-color':buttons.two === true?'green':''}" #buttonthree id="button-three" value={{eventValues[2]}}
+            (click)="changeEleValuesOld(2)">
+    </div>
+
+    <div class="row-adjust ">
+        <input type="button" class="button" [ngStyle]="{'background-color':buttons.three === true?'green':''}" #buttonfour id="button-four" value={{eventValues[3]}}
+            (click)="changeEleValuesOld(3)">
+
+        <input type="button" class="button" [ngStyle]="{'background-color':buttons.four === true?'green':''}" #buttonfive id="button-five" value={{eventValues[4]}}
+            (click)="changeEleValuesOld(4)">
+
+        <input type="button" class="button" [ngStyle]="{'background-color':buttons.five === true?'green':''}" #buttonsix id="button-six" value={{eventValues[5]}}
+            (click)="changeEleValuesOld(5)">
+    </div>
+    <div class="row-adjust ">
+        <input type="button" class="button" [ngStyle]="{'background-color':buttons.six === true?'green':''}" #buttonseven id="button-seven" value={{eventValues[6]}}
+            (click)="changeEleValuesOld(6)">
+
+        <input type="button" class="button" [ngStyle]="{'background-color':buttons.seven === true?'green':''}" #buttoneight id="button-eight" value={{eventValues[7]}}
+            (click)="changeEleValuesOld(7)">
+
+        <input type="button" class="button" [ngStyle]="{'background-color':buttons.eight === true?'green':''}" #buttonnine id="button-nine" value={{eventValues[8]}}
+            (click)="changeEleValuesOld(8)">
+    </div>
+    <div><button class="btn btn-secondary" style="margin-top: 10px;" (click)="reset(modal)">Reset</button></div>
+
+<ng-template #modal>
+    <div  class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+    Header
+                </div>
+                <div class="modal-body">
+    Body
+                </div>
+                <div class="modal-footer">
+    Footer
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
