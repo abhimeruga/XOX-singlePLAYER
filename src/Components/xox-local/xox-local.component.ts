@@ -54,9 +54,9 @@ export class XoxLocalComponent implements OnInit {
             this.counter++;
             if (this.checkWinner(this.eventValues)) {
               setTimeout(() => {
-                alert('winner');
+                alert('Hurray !! You Won !!');
                 this.reset();
-              }, 500);
+              }, 300);
             }
           }
         }
@@ -171,10 +171,10 @@ export class XoxLocalComponent implements OnInit {
         }
         if (this.checkWinner(this.eventValues)) {
           setTimeout(() => {
-            alert('winner');
+            alert('Hurray !! You Won !!');
             console.log('Winner');
             this.reset();
-          }, 500);
+          }, 300);
         }
       }
     }
