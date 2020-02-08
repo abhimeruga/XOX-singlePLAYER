@@ -12,6 +12,14 @@
     outline: none;
     transition: 2s;
   }
+  .dev-name{
+    margin-top: 40px;
+    margin-bottom: 0px!important;
+    margin-left: 250px;
+  }
+  .button:hover{
+    background: linear-gradient(to bottom, #250e3b 0%, #074f5c 100%);
+  }
   .box{
     border-radius: 14px;
       left: 50%;
@@ -38,7 +46,6 @@
   }
   .header-xox-game{
     margin-top:10px;
-    margin-left:42px!important;
   }
   
   .message-list {
@@ -157,6 +164,11 @@
   ::-webkit-scrollbar-thumb:hover {
     background: rgb(199, 43, 108); 
   }
+  .winner{
+      background: linear-gradient(to bottom, #250e3b 0%, #074f5c 100%);
+      color:black;
+  }
+
   
   ::ng-deep .mat-form-field .mat-form-field-placeholder{
   
