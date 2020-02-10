@@ -12,8 +12,47 @@
     outline: none;
     transition: 2s;
   }
+  .user{
+    border: 0;
+    margin: 20px auto;
+    display: block;
+    background: none ;
+    font-size: 16px;
+    text-align: center;
+    outline:none;
+    border: 2px solid cyan;
+    border-radius: 34px;
+    padding:14px 10px;
+    width: 280px;
+    transition: .50s;
+    color:white;
+  }
+  .user:focus{
+    width: 300px;
+    border: 2px solid rgb(51, 224, 8);
+}
+.play{
+    border: 0;
+    margin: 20px auto;
+    display: block;
+    background: none ;
+    font-size: 16px;
+    text-align: center;
+    outline:none;
+    border: 2px solid rgb(30, 121, 2);
+    border-radius: 34px;
+    padding:14px 10px;
+    width: 150px;
+    transition: .50s;
+    color:rgb(97, 155, 170)   
+}
+
+.play:hover{
+    background-color:  rgb(0, 255, 191);
+    color:black;
+}
   .dev-name{
-    margin-top: 40px;
+    margin-top: 28px;
     margin-bottom: 0px!important;
     margin-left: 250px;
   }

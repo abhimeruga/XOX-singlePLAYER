@@ -3,38 +3,47 @@
     <div class="" style="margin-top:60px">
         <h3>XOX'R</h3>
         </div>
-    <div class="row-adjust " >
-        <input type="button" class="button" [ngClass]="{'winner':buttons.zero}" #buttonone id="button-one" value={{eventValues[0]}}
-            (click)="changeEleValuesOld(0)">
-
-        <input type="button" class="button" [ngClass]="{'winner':buttons.one}" #buttontwo id="button-two" value={{eventValues[1]}}
-            (click)="changeEleValuesOld(1)">
-
-        <input type="button" class="button" [ngClass]="{'winner':buttons.two}" #buttonthree id="button-three" value={{eventValues[2]}}
-            (click)="changeEleValuesOld(2)">
-    </div>
-
-    <div class="row-adjust ">
-        <input type="button" class="button" [ngClass]="{'winner':buttons.three}" #buttonfour id="button-four" value={{eventValues[3]}}
-            (click)="changeEleValuesOld(3)">
-
-        <input type="button" class="button" [ngClass]="{'winner':buttons.four}" #buttonfive id="button-five" value={{eventValues[4]}}
-            (click)="changeEleValuesOld(4)">
-
-        <input type="button" class="button" [ngClass]="{'winner':buttons.five}" #buttonsix id="button-six" value={{eventValues[5]}}
-            (click)="changeEleValuesOld(5)">
-    </div>
-    <div class="row-adjust ">
-        <input type="button" class="button" [ngClass]="{'winner':buttons.six}" #buttonseven id="button-seven" value={{eventValues[6]}}
-            (click)="changeEleValuesOld(6)">
-
-        <input type="button" class="button" [ngClass]="{'winner':buttons.seven}" #buttoneight id="button-eight" value={{eventValues[7]}}
-            (click)="changeEleValuesOld(7)">
-
-        <input type="button" class="button" [ngClass]="{'winner':buttons.eight}" #buttonnine id="button-nine" value={{eventValues[8]}}
-            (click)="changeEleValuesOld(8)">
-    </div>
-    <div><button class="btn btn-secondary" style="margin-top: 10px;" (click)="reset()">Reset</button></div>
+        <div *ngIf="!playGame" style="text-align: center;">
+            <input type="text" value="" placeholder="Enter KEY" #user class="user">
+            <button class="play" (click)="play(user)"><span [ngClass]="{'spinner-border':loading}"></span>Play</button>
+        </div>
+        <div *ngIf="playGame">
+            <h4>{{user}} Vs {{user2}}</h4>
+            <div class="row-adjust " >
+                <input type="button" class="button" [ngClass]="{'winner':buttons.zero}" #buttonone id="button-one" value={{eventValues[0]}}
+                    (click)="changeEleValuesOld(0)">
+        
+                <input type="button" class="button" [ngClass]="{'winner':buttons.one}" #buttontwo id="button-two" value={{eventValues[1]}}
+                    (click)="changeEleValuesOld(1)">
+        
+                <input type="button" class="button" [ngClass]="{'winner':buttons.two}" #buttonthree id="button-three" value={{eventValues[2]}}
+                    (click)="changeEleValuesOld(2)">
+            </div>
+        
+            <div class="row-adjust ">
+                <input type="button" class="button" [ngClass]="{'winner':buttons.three}" #buttonfour id="button-four" value={{eventValues[3]}}
+                    (click)="changeEleValuesOld(3)">
+        
+                <input type="button" class="button" [ngClass]="{'winner':buttons.four}" #buttonfive id="button-five" value={{eventValues[4]}}
+                    (click)="changeEleValuesOld(4)">
+        
+                <input type="button" class="button" [ngClass]="{'winner':buttons.five}" #buttonsix id="button-six" value={{eventValues[5]}}
+                    (click)="changeEleValuesOld(5)">
+            </div>
+            <div class="row-adjust ">
+                <input type="button" class="button" [ngClass]="{'winner':buttons.six}" #buttonseven id="button-seven" value={{eventValues[6]}}
+                    (click)="changeEleValuesOld(6)">
+        
+                <input type="button" class="button" [ngClass]="{'winner':buttons.seven}" #buttoneight id="button-eight" value={{eventValues[7]}}
+                    (click)="changeEleValuesOld(7)">
+        
+                <input type="button" class="button" [ngClass]="{'winner':buttons.eight}" #buttonnine id="button-nine" value={{eventValues[8]}}
+                    (click)="changeEleValuesOld(8)">
+            </div>
+            <p>Turn : {{turn}}</p>
+            <!-- <div><button class="btn btn-secondary" style="margin-top: 10px;" (click)="reset()">Reset</button></div> -->
+        </div>
+    
 <div class="dev-name"><P>~abhi Meruga</P></div>
 <ng-template #modal>
     <div  class="modal">
