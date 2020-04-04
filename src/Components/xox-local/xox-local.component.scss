@@ -1,3 +1,6 @@
+h1, h2, h3, h4, h5, h6, p, span {
+  color: rgb(117, 167, 172);
+}
 .button {
     background: linear-gradient(to bottom, #07171d 0%, #130747 100%);
     border: 1px solid black;
@@ -52,6 +55,7 @@
     color:black;
 }
   .dev-name{
+    position: absolute;
     margin-top: 28px;
     margin-bottom: 0px!important;
     margin-left: 250px;
@@ -167,7 +171,24 @@
     margin-bottom: 20px!important;
     padding-bottom: 4px;
   }
+  .glow {
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    -webkit-animation: glow 0.5s ease-in-out infinite alternate;
+    -moz-animation: glow 0.5s ease-in-out infinite alternate;
+    animation: glow 0.5s ease-in-out infinite alternate;
+  }
   
+  @-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #411db6, 0 0 40px #411db6, 0 0 50px #411db6, 0 0 60px #411db6, 0 0 70px #411db6;
+    }
+    
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px #4dbbff, 0 0 40px #4dbbff, 0 0 50px #4dbbff, 0 0 60px #4dbbff, 0 0 70px #4dbbff, 0 0 80px #4dbbff;
+    }
+  }
   .message-username {
     color: rgba(29, 134, 219, 0.7)!important;
     background: linear-gradient(to bottom, #071149 0%, #6e1341 100%) !important;

@@ -1,14 +1,18 @@
 
-<div class=" box header-xox-game">
-    <div class="" style="margin-top:60px">
-        <h3>XOX'R</h3>
-        </div>
+<div class="box header-xox-game">
+    
         <div *ngIf="!playGame" style="text-align: center;">
+            <div class="" style="margin-top:60px">
+                <h3>XOX'R</h3>
+            </div>
             <input type="text" value="" placeholder="Enter KEY" #user class="user">
             <button class="play" (click)="play(user)"><span [ngClass]="{'spinner-border':loading}"></span>Play</button>
         </div>
         <div *ngIf="playGame">
-            <h4>{{user}} Vs {{user2}}</h4>
+            <div class="" style="margin-top:20px">
+                <h3>XOX'R</h3>
+            </div>
+            <h4>{{user.name}} Vs {{user2.name}}</h4>
             <div class="row-adjust " >
                 <input type="button" class="button" [ngClass]="{'winner':buttons.zero}" #buttonone id="button-one" value={{eventValues[0]}}
                     (click)="changeEleValuesOld(0)">
@@ -41,24 +45,9 @@
                     (click)="changeEleValuesOld(8)">
             </div>
             <p>Turn : {{turn}}</p>
+            <span [ngClass]="isWinner?'':'glow'">{{winnerName}}</span>
             <!-- <div><button class="btn btn-secondary" style="margin-top: 10px;" (click)="reset()">Reset</button></div> -->
         </div>
     
 <div class="dev-name"><P>~abhi Meruga</P></div>
-<ng-template #modal>
-    <div  class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-    Header
-                </div>
-                <div class="modal-body">
-    Body
-                </div>
-                <div class="modal-footer">
-    Footer
-                </div>
-            </div>
-        </div>
-    </div>
-</ng-template>
+

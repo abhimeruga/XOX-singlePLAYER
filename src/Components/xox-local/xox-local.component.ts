@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TestgameService } from '../../Services/testgame.service';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-xox-local',
   templateUrl: './xox-local.component.html',
@@ -27,8 +28,8 @@ export class XoxLocalComponent implements OnInit {
     eight: false
   };
   public playGame = false;
-  public user = '';
-  public user2 = '';
+  public user: any;
+  public user2: any;
   public turn = '';
   public loading = false;
   initialValues() {
@@ -47,15 +48,15 @@ export class XoxLocalComponent implements OnInit {
   play(user) {
     this.loading = true;
     this.tg.getData().subscribe(data => {
-      if (data && (data['user1'] === user.value || data['user2'] === user.value)) {
+      if (data && (data['user1'].name === user.value || data['user2'].name  === user.value)) {
         this.loading = false;
         this.playGame = true;
-        if (user.value === data['user1']) {
-          this.user = user.value;
-          this.user2 = data['user2']
+        if (user.value === data['user1'].name ) {
+          this.user = data['user1'] ;
+          this.user2 = data['user2'] ;
         } else {
-          this.user = user.value;
-          this.user2 = data['user1']
+          this.user = data['user2'];
+          this.user2 = data['user1'] ;
         }
         this.eventValues = data['eventValues'];
         this.counter = data['counter'];
@@ -67,38 +68,48 @@ export class XoxLocalComponent implements OnInit {
     });
   }
   changeEleValuesOld(btnValue) {
+    
     this.tg.getData().subscribe(data => {
+      let winner = '';
+      winner = this.user.name !== this.turn ? this.user.name : this.user2.name;
       if (data) {
-        this.eventValues = data['eventValues']
+        this.eventValues = data['eventValues'];
         if (this.checkWinner(this.eventValues)) {
+          this.isWinner = false;
+          this.winnerName = `Winner ${winner}`
           setTimeout(() => {
-            alert(`Hurray !! ${this.turn} Won !!`);
-            console.log('Winner');
-            this.reset();
-          }, 300);
+            this.isWinner = true;
+            this.winnerName = `Previous Winner ${winner}`;
+            this.reset(winner);
+          }, 1000);
         }
       }
     });
     // tslint:disable-next-line: radix
-    if (this.user === this.turn) {
+    if (this.user.name  === this.turn) {
       const id = parseInt(btnValue);
-      this.valueBTN = this.counter % 2 === 0 ? 'X' : 'O';
+      this.valueBTN = this.user.value;
       if (this.counter < 6) {
         if (this.counter < 4 && this.eventValues[id] === ' ') {
           this.eventValues[id] = this.valueBTN;
           this.counter++;
-          this.tg.setData(this.user2, this.eventValues, this.counter);
+          this.tg.setData(this.user2.name , this.eventValues, this.counter);
         } else if (this.counter > 3) {
           {
             if (this.eventValues[id] === ' ') {
               this.eventValues[id] = this.valueBTN;
               this.counter++;
-              this.tg.setData(this.user2, this.eventValues, this.counter);
+              this.tg.setData(this.user2.name , this.eventValues, this.counter);
+              let winner = '';
+              winner = this.user.name !== this.turn ? this.user.name : this.user2.name;
               if (this.checkWinner(this.eventValues)) {
+                this.isWinner = false;
+                this.winnerName = `Winner ${winner}`
                 setTimeout(() => {
-                  alert(`Hurray !! ${this.turn} Won !!`);
-                  this.reset();
-                }, 300);
+                  this.isWinner = true;
+                  this.winnerName = `Previous Winner ${winner}`;
+                  this.reset(winner);
+                }, 1000);
               }
             }
           }
@@ -108,19 +119,19 @@ export class XoxLocalComponent implements OnInit {
           this.move = true;
           this.prev = id;
         }
-        if (this.move) {
+        if (this.move && (this.eventValues[this.prev] === this.user.value)) {
           switch (id) {
             case 0: {
               if (this.prev === 1 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 3 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               }
             } break;
             case 1: {
@@ -128,17 +139,17 @@ export class XoxLocalComponent implements OnInit {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 4 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 2 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               }
             } break;
             case 2: {
@@ -146,12 +157,12 @@ export class XoxLocalComponent implements OnInit {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 5 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               }
             } break;
             case 3: {
@@ -159,17 +170,17 @@ export class XoxLocalComponent implements OnInit {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 4 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 6 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               }
             } break;
             case 4: {
@@ -177,22 +188,22 @@ export class XoxLocalComponent implements OnInit {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 3 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 5 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 7 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               }
             } break;
             case 5: {
@@ -200,17 +211,17 @@ export class XoxLocalComponent implements OnInit {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 4 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 8 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               }
             } break;
             case 6: {
@@ -218,12 +229,12 @@ export class XoxLocalComponent implements OnInit {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 7 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               }
             } break;
             case 7: {
@@ -231,17 +242,17 @@ export class XoxLocalComponent implements OnInit {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 4 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 8 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               }
             } break;
             case 8: {
@@ -249,30 +260,30 @@ export class XoxLocalComponent implements OnInit {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               } else if (this.prev === 5 && this.eventValues[id] === ' ') {
                 this.eventValues[id] = this.eventValues[this.prev];
                 this.eventValues[this.prev] = ' ';
                 this.counter++;
-                this.tg.setData(this.user2, this.eventValues, this.counter);
+                this.tg.setData(this.user2.name , this.eventValues, this.counter);
               }
             } break;
 
           }
-          if (this.checkWinner(this.eventValues)) {
+        /*  if (this.checkWinner(this.eventValues)) {
             setTimeout(() => {
               alert(`Hurray !! ${this.turn} Won !!`);
               console.log('Winner');
               this.reset();
             }, 300);
-          }
+          }*/
         }
       }
     }
   }
-  reset() {
+  reset(winner) {
     this.initialValues();
-    this.tg.setData(this.turn, this.eventValues, this.counter);
+    this.tg.setData(winner, this.eventValues, this.counter);
   }
   public checkWinner(event) {
     if (event[0] === 'X' && event[1] === 'X' && event[2] === 'X') {
