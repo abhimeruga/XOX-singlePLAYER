@@ -75,7 +75,7 @@ export class XoxLocalComponent implements OnInit {
   HTP_B() {
     this.howToPlay = !this.howToPlay;
   }
-  changeEleValuesOld(btnValue: string) {
+  changeEleValuesOld(btnValue: any) {
     this.tg.getData(this.key).subscribe(data => {
       let winner = '';
       winner = this.user.name !== this.turn ? this.user.name : this.user2.name;
