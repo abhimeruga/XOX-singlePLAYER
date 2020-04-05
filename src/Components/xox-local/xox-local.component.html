@@ -1,12 +1,33 @@
 
 <div class="box header-xox-game">
     
-        <div *ngIf="!playGame" style="text-align: center;">
-            <div class="" style="margin-top:60px">
+        <div *ngIf="!playGame && howToPlay" style="text-align: center;">
+            <div class="" style="margin-top:25px">
                 <h3>XOX'R</h3>
             </div>
-            <input type="text" value="" placeholder="Enter KEY" #user class="user">
-            <button class="play" (click)="play(user)"><span [ngClass]="{'spinner-border':loading}"></span>Play</button>
+            <input type="text" value="" placeholder="Your Name" #user class="user">
+            <input type="password" value="" placeholder="Enter Secret KEY" #key class="user">
+            <button class="play" (click)="play(user, key)"><span [ngClass]="{'spinner-border':loading}"></span>Play</button>
+            <button class="h-t-p-btn" (click)="HTP_B()">{{howToPlay ? 'How to Play ?': 'Back'}} </button>
+        </div>
+        <div *ngIf="!playGame && !howToPlay" style="text-align: center;">
+            <div class="" style="margin-top:5px">
+                <h4 class=h-t-p-heading> How to Play | XOX'R</h4>
+            </div>
+            <div class="how-to-play">
+                <p>1. The game is played on a grid that's 3 squares by 3 squares.</p>
+                
+                <p>2. You have 3 X's and your opponent has 3 O's.</p>
+                
+                <p>3. Players take turns putting their marks in empty squares.</p>
+                
+                <p>4. The first player to get 3 of her marks in a row (up, down, across, or diagonally) is the winner.</p>
+                
+                <p>5. When you finish marking all 3 X's, you will be able to move one of the marking(X) to the next cell(top, left, bottom, right).</p>
+                
+                <p>6. the game continues untill one of them has all thier markings(X/O) in a row (up, down, across, or diagonally).</p>
+            </div>
+            <button class="h-t-p-btn" (click)="HTP_B()">{{howToPlay ? 'How to Play': 'Back'}} </button>
         </div>
         <div *ngIf="playGame">
             <div class="" style="margin-top:20px">

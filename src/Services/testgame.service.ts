@@ -9,8 +9,8 @@ export class TestgameService {
 
   constructor(public db: AngularFirestore, public afAuth: AngularFireAuth) { }
 
-  getData() {
-    return this.db.collection('Game-Sample').doc('arrayData').valueChanges();
+  getData(doc?) {
+    return this.db.collection('Game-Sample').doc(doc).valueChanges();
   }
   setData(user, eventValues, counter, doc='arrayData') {
     this.db.collection('Game-Sample').doc(doc).update({

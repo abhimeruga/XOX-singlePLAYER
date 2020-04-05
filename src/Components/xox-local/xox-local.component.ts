@@ -11,6 +11,7 @@ export class XoxLocalComponent implements OnInit {
 
   public eventValues: Array<string> = [];
   public isWinner: boolean;
+  public key: string = ''
   public winnerName: string;
   public counter = 0;
   public valueBTN: string;
@@ -32,6 +33,7 @@ export class XoxLocalComponent implements OnInit {
   public user2: any;
   public turn = '';
   public loading = false;
+  public howToPlay = true;
   initialValues() {
     for (let i = 0; i < 9; i++) {
       this.eventValues[i] = ' ';
@@ -45,9 +47,10 @@ export class XoxLocalComponent implements OnInit {
   ngOnInit() {
     this.initialValues();
   }
-  play(user) {
+  play(user: any, key: any) {
     this.loading = true;
-    this.tg.getData().subscribe(data => {
+    this.key = key.value;
+    this.tg.getData(this.key).subscribe(data => {
       if (data && (data['user1'].name === user.value || data['user2'].name  === user.value)) {
         this.loading = false;
         this.playGame = true;
@@ -65,11 +68,15 @@ export class XoxLocalComponent implements OnInit {
         this.loading = false;
         alert('May be wrong KEY or check your Internet connection');
       }
+    }, (error)=>{
+      console.log(error);
     });
   }
-  changeEleValuesOld(btnValue) {
-    
-    this.tg.getData().subscribe(data => {
+  HTP_B() {
+    this.howToPlay = !this.howToPlay;
+  }
+  changeEleValuesOld(btnValue: string) {
+    this.tg.getData(this.key).subscribe(data => {
       let winner = '';
       winner = this.user.name !== this.turn ? this.user.name : this.user2.name;
       if (data) {
