@@ -6,7 +6,7 @@
                 <h3>XOX'R</h3>
             </div>
             <input type="text" value="" placeholder="Your Name" #user class="user">
-            <input type="password" value="" placeholder="Enter Secret KEY" #key class="user">
+            <input type="password" value="" placeholder="Secret KEY" #key class="user">
             <button class="play" (click)="play(user, key)"><span [ngClass]="{'spinner-border':loading}"></span>Play</button>
             <button class="h-t-p-btn" (click)="HTP_B()">{{howToPlay ? 'How to Play ?': 'Back'}} </button>
         </div>
@@ -66,6 +66,22 @@
                     (click)="changeEleValuesOld(8)">
             </div>
             <p>Turn : {{turn}}</p>
+           <!-- <div >
+                <div *ngIf="isWinner">
+                    <span *ngIf="">
+                        <input type="text" value="" placeholder="Your Message">
+                         <input type="button"  value="send" (click)="changeEleValuesOld(8)"> 
+                    </span>
+                    <span>Message:</span>
+                </div>
+                <div>
+                    <span>
+                        <input type="text" value="" placeholder="Your Message">
+                        <input type="button"  value="send" (click)="changeEleValuesOld(8)"> 
+                    </span>
+                    <span>Message:</span>
+                </div>      
+            </div>-->
             <span [ngClass]="isWinner?'':'glow'">{{winnerName}}</span>
             <!-- <div><button class="btn btn-secondary" style="margin-top: 10px;" (click)="reset()">Reset</button></div> -->
         </div>

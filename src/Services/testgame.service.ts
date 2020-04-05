@@ -12,7 +12,7 @@ export class TestgameService {
   getData(doc?) {
     return this.db.collection('Game-Sample').doc(doc).valueChanges();
   }
-  setData(user, eventValues, counter, doc='arrayData') {
+  setData(user, eventValues, counter, doc) {
     this.db.collection('Game-Sample').doc(doc).update({
       eventValues,
       counter,
