@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TestgameService } from '../../Services/testgame.service';
-import { take } from 'rxjs/operators';
+import {SwPush} from "@angular/service-worker";
 @Component({
   selector: 'app-xox-local',
   templateUrl: './xox-local.component.html',
   styleUrls: ['./xox-local.component.scss']
 })
 export class XoxLocalComponent implements OnInit {
-  constructor(private tg: TestgameService) { }
+  constructor(private tg: TestgameService, private swPush: SwPush,) { }
 
   public eventValues: Array<string> = [];
   public isWinner: boolean;
@@ -34,6 +34,7 @@ export class XoxLocalComponent implements OnInit {
   public turn = '';
   public loading = false;
   public howToPlay = true;
+  readonly VAPID_PUBLIC_KEY = "BAqSHDYT2TL9dNDKCLRKYFFj5Ddgm6NN3jpY8tzx0T87VMBWh3W0UtcM2tKW7sUMwazbb_AwZSTpFKz9UWzJLZ8";
   initialValues() {
     for (let i = 0; i < 9; i++) {
       this.eventValues[i] = ' ';
@@ -46,7 +47,23 @@ export class XoxLocalComponent implements OnInit {
   }
   ngOnInit() {
     this.initialValues();
+    this.subscribeToPush();
   }
+  private async subscribeToPush() {
+    try {
+      console.log(this.swPush);
+    if(this.swPush.isEnabled){
+      console.log('enabled!!!')
+    }
+      const sub = await this.swPush.requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY,
+      });
+      // TODO: Send to server.
+    } catch (err) {
+      console.error('Could not subscribe due to:', err);
+    }
+  }
+
   play(user: any, key: any) {
     this.loading = true;
     this.key = key.value;
