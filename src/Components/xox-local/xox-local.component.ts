@@ -28,6 +28,7 @@ export class XoxLocalComponent implements OnInit {
     seven: false,
     eight: false
   };
+  public secertMessage = '';
   public playGame = false;
   public user: any;
   public user2: any;
@@ -81,6 +82,8 @@ export class XoxLocalComponent implements OnInit {
         this.eventValues = data['eventValues'];
         this.counter = data['counter'];
         this.turn = data['turn'];
+        // to be removed 16 april..
+          this.secertMessage = data['secretMessage'] ? data['secretMessage'] : '';
       } else {
         this.loading = false;
         alert('May be wrong KEY or check your Internet connection');
