@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1586888988901,
+  "timestamp": 1587201244792,
   "index": "https://abhimeruga.github.io/XOX-singlePLAYER/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "https://abhimeruga.github.io/XOX-singlePLAYER/favicon.ico",
         "https://abhimeruga.github.io/XOX-singlePLAYER/index.html",
-        "https://abhimeruga.github.io/XOX-singlePLAYER/main-es2015.d9ccb968b78b684aa79a.js",
-        "https://abhimeruga.github.io/XOX-singlePLAYER/main-es5.d9ccb968b78b684aa79a.js",
+        "https://abhimeruga.github.io/XOX-singlePLAYER/main-es2015.8b355d3c8ebc64a21c74.js",
+        "https://abhimeruga.github.io/XOX-singlePLAYER/main-es5.8b355d3c8ebc64a21c74.js",
         "https://abhimeruga.github.io/XOX-singlePLAYER/manifest.webmanifest",
         "https://abhimeruga.github.io/XOX-singlePLAYER/polyfills-es2015.5b10b8fd823b6392f1fd.js",
         "https://abhimeruga.github.io/XOX-singlePLAYER/polyfills-es5.3e8196928d184a6e5319.js",
@@ -49,9 +49,9 @@
     "https://abhimeruga.github.io/XOX-singlePLAYER/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "https://abhimeruga.github.io/XOX-singlePLAYER/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "https://abhimeruga.github.io/XOX-singlePLAYER/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://abhimeruga.github.io/XOX-singlePLAYER/index.html": "465d32e73fc0699a33893d0c8774ee749aa2e8d6",
-    "https://abhimeruga.github.io/XOX-singlePLAYER/main-es2015.d9ccb968b78b684aa79a.js": "4f056ac0bb9e0bd71161dbe41c127049e3dc3560",
-    "https://abhimeruga.github.io/XOX-singlePLAYER/main-es5.d9ccb968b78b684aa79a.js": "209659a74d02c4e4887a1bd0b518614b7950d158",
+    "https://abhimeruga.github.io/XOX-singlePLAYER/index.html": "9688a4167f4ab03588fc8913e2595d4ccbc0a96c",
+    "https://abhimeruga.github.io/XOX-singlePLAYER/main-es2015.8b355d3c8ebc64a21c74.js": "650ce8e47656edcded39659575d105e03d9053c8",
+    "https://abhimeruga.github.io/XOX-singlePLAYER/main-es5.8b355d3c8ebc64a21c74.js": "874e0f275d4174eed6db96fb3e49c56868300d4e",
     "https://abhimeruga.github.io/XOX-singlePLAYER/manifest.webmanifest": "b200a8e27db8138a841f2fdadf6b52b0e1ae2537",
     "https://abhimeruga.github.io/XOX-singlePLAYER/polyfills-es2015.5b10b8fd823b6392f1fd.js": "9abfe15f17820a646e3d51c420908d9f8f7b69b8",
     "https://abhimeruga.github.io/XOX-singlePLAYER/polyfills-es5.3e8196928d184a6e5319.js": "a09a6044f37c73c715665663d2dcb61f666618a1",
