@@ -159,7 +159,7 @@ export class XoxLocalComponent implements OnInit, AfterViewChecked {
                   this.isWinner = true;
                   this.winnerName = `Previous Winner ${winner}`;
                   this.reset(winner);
-                }, 1000);
+                }, 500);
               }
             }
           }
