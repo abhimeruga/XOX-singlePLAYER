@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { TestgameService } from '../../Services/testgame.service';
 import {SwPush} from "@angular/service-worker";
 @Component({
@@ -6,13 +6,13 @@ import {SwPush} from "@angular/service-worker";
   templateUrl: './xox-local.component.html',
   styleUrls: ['./xox-local.component.scss']
 })
-export class XoxLocalComponent implements OnInit {
+export class XoxLocalComponent implements OnInit, AfterViewChecked {
   constructor(private tg: TestgameService, private swPush: SwPush,) { }
 
   public eventValues: Array<string> = [];
   public isWinner: boolean;
   public key: string = ''
-  public winnerName: string;
+  public winnerName: string = ' ';
   public counter = 0;
   public valueBTN: string;
   public move = false;
@@ -29,12 +29,14 @@ export class XoxLocalComponent implements OnInit {
     eight: false
   };
   public secertMessage = '';
+  public messages = [];
   public playGame = false;
   public user: any;
   public user2: any;
   public turn = '';
   public loading = false;
   public howToPlay = true;
+  public scrollEle;
   readonly VAPID_PUBLIC_KEY = "BAqSHDYT2TL9dNDKCLRKYFFj5Ddgm6NN3jpY8tzx0T87VMBWh3W0UtcM2tKW7sUMwazbb_AwZSTpFKz9UWzJLZ8";
   initialValues() {
     for (let i = 0; i < 9; i++) {
@@ -50,6 +52,11 @@ export class XoxLocalComponent implements OnInit {
     this.initialValues();
     this.subscribeToPush();
   }
+ ngAfterViewChecked() {
+  this.scrollEle = document.getElementById('messageScroll');
+  this.scrollEle  && (this.scrollEle.scrollTop = Math.max(0, this.scrollEle.scrollHeight - this.scrollEle.offsetHeight));
+ }
+
   private async subscribeToPush() {
     try {
       console.log(this.swPush);
@@ -84,6 +91,7 @@ export class XoxLocalComponent implements OnInit {
         this.turn = data['turn'];
         // to be removed 16 april..
           this.secertMessage = data['secretMessage'] ? data['secretMessage'] : '';
+          this.messages = data['messages'];
       } else {
         this.loading = false;
         alert('May be wrong KEY or check your Internet connection');
@@ -94,6 +102,21 @@ export class XoxLocalComponent implements OnInit {
   }
   HTP_B() {
     this.howToPlay = !this.howToPlay;
+  }
+  send(message, messageList) {
+    let sendTime = '';
+    if (message.value !== '') {
+      const messageValues: any = {};
+      messageValues.message = message.value;
+      sendTime = new Date().toLocaleString();
+      messageValues.name = this.user.name;
+      messageValues.time = sendTime;
+      this.messages.push(messageValues);
+      this.tg.sendMessage(this.key, this.messages);
+      message.value = '';
+      this.scrollEle = document.getElementById('messageScroll');
+      this.scrollEle.scrollTop = Math.max(0, this.scrollEle.scrollHeight - this.scrollEle.offsetHeight);
+    }
   }
   changeEleValuesOld(btnValue: any) {
     this.tg.getData(this.key).subscribe(data => {
@@ -108,7 +131,7 @@ export class XoxLocalComponent implements OnInit {
             this.isWinner = true;
             this.winnerName = `Previous Winner ${winner}`;
             this.reset(winner);
-          }, 1000);
+          }, 500);
         }
       }
     });

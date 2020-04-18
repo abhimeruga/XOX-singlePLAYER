@@ -21,4 +21,11 @@ export class TestgameService {
       console.log('Update turn error' + error);
     });
   }
+  sendMessage(keyword, messages) {
+    this.db.collection('Game-Sample').doc(keyword).update({
+      messages
+    }).catch( error => {
+      console.log('send message error' + error);
+    });
+  }
 }

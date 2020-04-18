@@ -1,5 +1,5 @@
 
-<div class="box header-xox-game">
+<div class="box header-xox-game" [ngStyle]="{'height':!playGame ? '60%' : '92%'  }">
     
         <div *ngIf="!playGame && howToPlay" style="text-align: center;">
             <div class="" style="margin-top:25px">
@@ -82,11 +82,28 @@
                     <span>Message:</span>
                 </div>      
             </div>-->
-            <span [ngClass]="isWinner?'':'glow'">{{winnerName}}</span>
+            <span [ngClass]="isWinner?'':'glow'">{{winnerName}}</span> 
+
+            <ul class="message-list list-overflow" id="messageScroll" #messageList>
+                <h3 class="no-msgs" *ngIf="messages.length === 0">No Messages</h3>
+                <div *ngIf="!(messages.length === 0)">
+                    <li class="single-message" *ngFor=" let message of messages" [ngStyle]="{
+                    'text-align': message.name === user.name ? 'right' : 'left', 
+                    'background':message.name === user.name ? 'linear-gradient(to bottom, #07171d 0%, #130747 100%)' : 'linear-gradient(to bottom, #130747 0%, #07171d 100%)',
+                    'border': message.name === user.name ? '0.4px solid #E3BAC6' : '0.4px solid #66CDAA'}">
+                        <p class="message-username"  [ngStyle]="{'color':message.name === user.name ? '#66CDAA' : '#E3BAC6'  }" >{{message.time}}</p>
+                        <p class="message-wrap"  [ngStyle]="{'color':message.name === user.name ?  '#3F96A0' : '#BC9EC1'  }" >{{message.message}}</p>
+                    </li>
+                </div>
+            </ul>
+            <input class="send-message"  type="text" placeholder="Type a Message" #message>
+                <button class="send-style"  (click)="send(message, messageList)"><img src="https://img.icons8.com/material-outlined/24/000000/send-comment.png"/></button>
+
+
             <!-- <div><button class="btn btn-secondary" style="margin-top: 10px;" (click)="reset()">Reset</button></div> -->
-            <p class="h-t-p-btn glow" style="top: 85%;" *ngIf="user.name === 'Sherlyn'">{{secertMessage}}</p>
+            <p class="h-t-p-btn glow" style="top: 85%;" >{{secertMessage}}</p>
         </div>
     
-<div class="dev-name"><p>~abhi Meruga</p></div>
+<div class="dev-name" *ngIf="!playGame"><p>~abhi Meruga</p></div>
 
 
