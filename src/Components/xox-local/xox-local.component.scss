@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, h6, p, span {
       left: 50%;
       top:50%;
       position: absolute;
-      width:50%;
+      width:360px;
       padding:10px,40px,20px;
       margin: 10px,0px;
       transform: translate(-50%,-50%);
@@ -151,10 +151,9 @@ h1, h2, h3, h4, h5, h6, p, span {
       margin: 0px!important;
       padding: 1px 5px;
       border-bottom: thin;
-     // color:#9ef3ed;
   }
   .message-username {
-    // color: rgb(165, 162, 162);
+    text-decoration: underline;
     margin: 0px;
     padding: 1px 5px;
     font-size: 12px;
@@ -184,6 +183,12 @@ h1, h2, h3, h4, h5, h6, p, span {
     padding: 10px;
     text-align: center;
     
+  }
+  .p-turn {
+    margin: 0px!important;
+  }
+  .span-winner {
+    margin: 2px 0px;
   }
   .h-t-p-btn {
     position: absolute;
