@@ -65,8 +65,8 @@
                 <input type="button" class="button" [ngClass]="{'winner':buttons.eight}" #buttonnine id="button-nine" value={{eventValues[8]}}
                     (click)="changeEleValuesOld(8)">
             </div>
-            <p class="p-turn " >Turn : {{turn}}</p>
-            <span class="span-winner" [ngClass]="isWinner?'':'glow'">{{winnerName}}</span> 
+            <p class="p-turn " >Turn : {{turn}}<span class="span-winner" [ngClass]="isWinner?'':'glow'">{{winnerName}}</span></p>
+            <p class="new-msg"><span class="glow" *ngIf="newMessage" style="font-size: 14px!important;" >You have New Message!!</span> </p> 
 
             <ul class="message-list list-overflow" id="messageScroll" #messageList>
                 <h3 class="no-msgs" *ngIf="messages.length === 0">No Messages</h3>
@@ -81,7 +81,7 @@
                 </div>
             </ul>
             <input class="send-message"  type="text" placeholder="Type a Message" #message>
-                <button class="send-style"  (click)="send(message, messageList)"><img src="https://img.icons8.com/material-outlined/24/000000/send-comment.png"/></button>
+                <button class="send-style"  (click)="send(message)"><img src="https://img.icons8.com/material-outlined/24/000000/send-comment.png"/></button>
 
 
             <!-- <div><button class="btn btn-secondary" style="margin-top: 10px;" (click)="reset()">Reset</button></div> -->

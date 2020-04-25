@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
@@ -28,4 +28,7 @@ export class TestgameService {
       console.log('send message error' + error);
     });
   }
+
+  checkEmail(user) {
+}
 }

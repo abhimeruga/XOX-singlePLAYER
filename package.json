@@ -22,6 +22,7 @@
     "@angular/pwa": "^0.901.0",
     "@angular/router": "~8.2.14",
     "@angular/service-worker": "~8.2.14",
+    "email-existence": "^0.1.6",
     "firebase": "^7.8.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

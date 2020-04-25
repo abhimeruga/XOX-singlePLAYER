@@ -37,6 +37,8 @@ export class XoxLocalComponent implements OnInit, AfterViewChecked {
   public loading = false;
   public howToPlay = true;
   public scrollEle;
+  public prevMsgCount: number;
+  public newMessage: boolean = false;
   readonly VAPID_PUBLIC_KEY = "BAqSHDYT2TL9dNDKCLRKYFFj5Ddgm6NN3jpY8tzx0T87VMBWh3W0UtcM2tKW7sUMwazbb_AwZSTpFKz9UWzJLZ8";
   initialValues() {
     for (let i = 0; i < 9; i++) {
@@ -52,9 +54,22 @@ export class XoxLocalComponent implements OnInit, AfterViewChecked {
     this.initialValues();
     this.subscribeToPush();
   }
+
  ngAfterViewChecked() {
-  this.scrollEle = document.getElementById('messageScroll');
-  this.scrollEle  && (this.scrollEle.scrollTop = Math.max(0, this.scrollEle.scrollHeight - this.scrollEle.offsetHeight));
+  let CurrentMsgCount = this.messages.length;
+  if (this.playGame && (this.prevMsgCount !== CurrentMsgCount)) {
+    this.scrollEle = document.getElementById('messageScroll');
+    this.scrollEle  && (this.scrollEle.scrollTop = Math.max(0, this.scrollEle.scrollHeight - this.scrollEle.offsetHeight));
+  } 
+  if( this.playGame && (this.prevMsgCount !== CurrentMsgCount) && (this.messages[CurrentMsgCount-1].name !== this.user.name) ) {
+     setTimeout(()=>{
+      this.newMessage = true;
+      setTimeout(()=>{
+        this.newMessage = false;
+       },1000);
+     },0);
+  }
+  this.prevMsgCount = this.messages.length;  
  }
 
   private async subscribeToPush() {
@@ -96,6 +111,7 @@ export class XoxLocalComponent implements OnInit, AfterViewChecked {
         this.loading = false;
         alert('May be wrong KEY or check your Internet connection');
       }
+      this.prevMsgCount = this.messages.length;
     }, (error)=>{
       console.log(error);
     });
@@ -103,7 +119,7 @@ export class XoxLocalComponent implements OnInit, AfterViewChecked {
   HTP_B() {
     this.howToPlay = !this.howToPlay;
   }
-  send(message, messageList) {
+  send(message) {
     let sendTime = '';
     if (message.value !== '') {
       const messageValues: any = {};
@@ -114,9 +130,10 @@ export class XoxLocalComponent implements OnInit, AfterViewChecked {
       this.messages.push(messageValues);
       this.tg.sendMessage(this.key, this.messages);
       message.value = '';
-      this.scrollEle = document.getElementById('messageScroll');
-      this.scrollEle.scrollTop = Math.max(0, this.scrollEle.scrollHeight - this.scrollEle.offsetHeight);
     }
+  }
+  checkNewMessage () {
+
   }
   changeEleValuesOld(btnValue: any) {
     this.tg.getData(this.key).subscribe(data => {
@@ -126,10 +143,10 @@ export class XoxLocalComponent implements OnInit, AfterViewChecked {
         this.eventValues = data['eventValues'];
         if (this.checkWinner(this.eventValues)) {
           this.isWinner = false;
-          this.winnerName = `Winner ${winner}`
+          this.winnerName = ` Winner ${winner}`
           setTimeout(() => {
             this.isWinner = true;
-            this.winnerName = `Previous Winner ${winner}`;
+            this.winnerName = ` | Previous Winner ${winner}`;
             this.reset(winner);
           }, 500);
         }
