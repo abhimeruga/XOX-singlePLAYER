@@ -81,7 +81,6 @@ export class XoxLocalComponent implements OnInit, AfterViewChecked {
       const sub = await this.swPush.requestSubscription({
         serverPublicKey: this.VAPID_PUBLIC_KEY,
       });
-      // TODO: Send to server.
     } catch (err) {
       console.error('Could not subscribe due to:', err);
     }
