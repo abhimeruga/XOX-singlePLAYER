@@ -57,7 +57,7 @@ export class XoxLocalComponent implements OnInit, AfterViewChecked {
 
  ngAfterViewChecked() {
   let CurrentMsgCount = this.messages.length;
-  if (this.playGame && (this.prevMsgCount !== CurrentMsgCount)) {
+  if (this.playGame) {
     this.scrollEle = document.getElementById('messageScroll');
     this.scrollEle  && (this.scrollEle.scrollTop = Math.max(0, this.scrollEle.scrollHeight - this.scrollEle.offsetHeight));
   } 

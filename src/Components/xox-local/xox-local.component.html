@@ -80,8 +80,10 @@
                     </li>
                 </div>
             </ul>
-            <input class="send-message"  type="text" placeholder="Type a Message" #message>
-                <button class="send-style"  (click)="send(message)"><img src="https://img.icons8.com/material-outlined/24/000000/send-comment.png"/></button>
+            <form action="" (submit)="send(message)">
+                <input class="send-message"  type="text" placeholder="Type a Message" #message>
+                    <button class="send-style"  (click)="send(message)"><img src="https://img.icons8.com/material-outlined/24/000000/send-comment.png"/></button>
+            </form>
 
 
             <!-- <div><button class="btn btn-secondary" style="margin-top: 10px;" (click)="reset()">Reset</button></div> -->
